@@ -16,6 +16,7 @@ const stepperSlice = createSlice({
         state.prevSteps = [...state.prevSteps, state.activeStep];
         state.activeStep += 1;
       }
+
     },
     prevStep: (state) => {
       if (
