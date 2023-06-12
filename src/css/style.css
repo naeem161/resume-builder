@@ -22,3 +22,9 @@
   margin-bottom: 0.15rem !important;
   min-height: 100px !important;
 }
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}

@@ -31,11 +31,6 @@ const initialValues = {
   summary: "",
 };
 
-// formik onSubmit method
-const onSubmit = (values) => {
-  console.log("Form submitted with values: ", values);
-};
-
 // Profile Component
 const Profile = () => {
   const dispatch = useDispatch();
@@ -43,7 +38,13 @@ const Profile = () => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit,
+    // formik onSubmit method
+    onSubmit: (values) => {
+      if (formik.isValid) {
+        console.log("Form submitted with values: ", values);
+        dispatch(nextStep());
+      }
+    },
   });
 
   return (
@@ -219,29 +220,21 @@ const Profile = () => {
           </Grid>
         </Grid>
 
-        {/* submit button  */}
-        <button style={{ marginTop: "2rem" }} type="submit">
-          Submit
-        </button>
+        {/* previous button  */}
+        <div className="btn-container">
+          <div>
+            <Button color="inherit" onClick={() => dispatch(prevStep())}>
+              Back
+            </Button>
+          </div>
+          <div>
+            <Button type="submit" variant="contained">
+              Next
+            </Button>
+          </div>
+        </div>
       </form>
       {/* ----------------------------Form end here -------------------------------- */}
-
-      {/* next button  */}
-      <Button
-        sx={{ mt: 4 }}
-        color="primary"
-        onClick={() => dispatch(prevStep())}
-      >
-        Back
-      </Button>
-      {/* previous button  */}
-      <Button
-        sx={{ mt: 4 }}
-        variant="contained"
-        onClick={() => dispatch(nextStep())}
-      >
-        Next
-      </Button>
     </>
   );
 };
