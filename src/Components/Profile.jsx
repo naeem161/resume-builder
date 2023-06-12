@@ -3,6 +3,7 @@ import { nextStep, prevStep } from "../features/stepper/stepperSlice";
 import { Button, TextField, Grid } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import "../css/style.css";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is required"),
@@ -48,12 +49,19 @@ const Profile = () => {
   return (
     <>
       {/* ----------------------------Form Start here -------------------------------- */}
-      <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={4} sx={{ mt: 4 }}>
+
+      <form
+        onSubmit={formik.handleSubmit}
+        style={{ margin: "40px 20px 0px 20px" }}
+      >
+        <Grid container justifyContent="center" columnGap={2}>
           {/* first name field  */}
-          <Grid item xs={6} className="item">
-            <label htmlFor="firstName">First Name</label>
+          <Grid item xs={4} className="item">
+            <label className="text-input" htmlFor="firstName">
+              First Name
+            </label>
             <TextField
+              size="small"
               type="text"
               id="firstName"
               name="firstName"
@@ -61,16 +69,22 @@ const Profile = () => {
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
               variant="outlined"
+              fullWidth
             />
-            {formik.errors.firstName && formik.touched.firstName && (
-              <small>{formik.errors.firstName}</small>
-            )}
+            <div>
+              {formik.errors.firstName && formik.touched.firstName && (
+                <small className="error-text">{formik.errors.firstName}</small>
+              )}
+            </div>
           </Grid>
 
           {/* last name field  */}
-          <Grid item xs={6} className="item">
-            <label htmlFor="lastName">Last Name</label>
+          <Grid item xs={4} className="item">
+            <label className="text-input" htmlFor="lastName">
+              Last Name
+            </label>
             <TextField
+              size="small"
               type="text"
               id="lastName"
               name="lastName"
@@ -78,16 +92,22 @@ const Profile = () => {
               onBlur={formik.handleBlur}
               value={formik.values.lastName}
               variant="outlined"
+              fullWidth
             />
-            {formik.errors.lastName && formik.touched.lastName && (
-              <small>{formik.errors.lastName}</small>
-            )}
+            <div>
+              {formik.errors.lastName && formik.touched.lastName && (
+                <small className="error-text">{formik.errors.lastName}</small>
+              )}
+            </div>
           </Grid>
 
           {/* phone field  */}
-          <Grid item xs={6} className="item">
-            <label htmlFor="phone"> Phone Number</label>
+          <Grid item xs={4} className="item">
+            <label className="text-input" htmlFor="phone">
+              Phone Number
+            </label>
             <TextField
+              size="small"
               type="text"
               id="phone"
               name="phone"
@@ -95,16 +115,22 @@ const Profile = () => {
               onBlur={formik.handleBlur}
               value={formik.values.phone}
               variant="outlined"
+              fullWidth
             />
-            {formik.errors.phone && formik.touched.phone && (
-              <small>{formik.errors.phone}</small>
-            )}
+            <div>
+              {formik.errors.phone && formik.touched.phone && (
+                <small className="error-text">{formik.errors.phone}</small>
+              )}
+            </div>
           </Grid>
 
           {/* email field  */}
-          <Grid item xs={6} className="item">
-            <label htmlFor="email"> Email</label>
+          <Grid item xs={4} className="item">
+            <label className="text-input" htmlFor="email">
+              Email
+            </label>
             <TextField
+              size="small"
               type="text"
               id="email"
               name="email"
@@ -112,16 +138,22 @@ const Profile = () => {
               onBlur={formik.handleBlur}
               value={formik.values.email}
               variant="outlined"
+              fullWidth
             />
-            {formik.errors.email && formik.touched.email && (
-              <small>{formik.errors.email}</small>
-            )}
+            <div>
+              {formik.errors.email && formik.touched.email && (
+                <small className="error-text">{formik.errors.email}</small>
+              )}
+            </div>
           </Grid>
 
           {/* city field  */}
-          <Grid item xs={6} className="item">
-            <label htmlFor="city"> City</label>
+          <Grid item xs={4} className="item">
+            <label className="text-input" htmlFor="city">
+              City
+            </label>
             <TextField
+              size="small"
               type="text"
               id="city"
               name="city"
@@ -129,16 +161,22 @@ const Profile = () => {
               onBlur={formik.handleBlur}
               value={formik.values.city}
               variant="outlined"
+              fullWidth
             />
-            {formik.errors.city && formik.touched.city && (
-              <small>{formik.errors.city}</small>
-            )}
+            <div>
+              {formik.errors.city && formik.touched.city && (
+                <small className="error-text">{formik.errors.city}</small>
+              )}
+            </div>
           </Grid>
 
           {/* country field  */}
-          <Grid item xs={6} className="item">
-            <label htmlFor="country"> Country</label>
+          <Grid item xs={4} className="item">
+            <label className="text-input" htmlFor="country">
+              Country
+            </label>
             <TextField
+              size="small"
               type="text"
               id="country"
               name="country"
@@ -146,16 +184,22 @@ const Profile = () => {
               onBlur={formik.handleBlur}
               value={formik.values.country}
               variant="outlined"
+              fullWidth
             />
-            {formik.errors.country && formik.touched.country && (
-              <small>{formik.errors.country}</small>
-            )}
+            <div>
+              {formik.errors.country && formik.touched.country && (
+                <small className="error-text">{formik.errors.country}</small>
+              )}
+            </div>
           </Grid>
 
           {/* summary field  */}
-          <Grid item xs={6} className="item">
-            <label htmlFor="summary"> Summary</label>
+          <Grid item xs={8} className="item">
+            <label className="text-input" htmlFor="summary">
+              Summary
+            </label>
             <TextField
+              size="small"
               type="text"
               id="summary"
               name="summary"
@@ -163,10 +207,15 @@ const Profile = () => {
               onBlur={formik.handleBlur}
               value={formik.values.summary}
               variant="outlined"
+              multiline
+              rows={3}
+              fullWidth
             />
-            {formik.errors.summary && formik.touched.summary && (
-              <small>{formik.errors.summary}</small>
-            )}
+            <div>
+              {formik.errors.summary && formik.touched.summary && (
+                <small className="error-text">{formik.errors.summary}</small>
+              )}
+            </div>
           </Grid>
         </Grid>
 
@@ -176,6 +225,7 @@ const Profile = () => {
         </button>
       </form>
       {/* ----------------------------Form end here -------------------------------- */}
+
       {/* next button  */}
       <Button
         sx={{ mt: 4 }}
