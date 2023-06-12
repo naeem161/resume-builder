@@ -1,5 +1,6 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { nextStep, prevStep } from "../features/stepper/stepperSlice";
+import { saveProfile } from "../features/profile/profileSlice";
 import { Button, TextField, Grid } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -21,19 +22,21 @@ const validationSchema = Yup.object().shape({
   country: Yup.string().required("Country is required"),
   summary: Yup.string().required("Address is required"),
 });
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  phone: "",
-  email: "",
-  city: "",
-  country: "",
-  summary: "",
-};
 
 // Profile Component
 const Profile = () => {
   const dispatch = useDispatch();
+  const { profile } = useSelector((store) => store);
+
+  const initialValues = {
+    firstName: profile.firstName,
+    lastName: profile.lastName,
+    phone: profile.phone,
+    email: profile.email,
+    city: profile.city,
+    country: profile.country,
+    summary: profile.summary,
+  };
 
   const formik = useFormik({
     initialValues,
@@ -41,7 +44,7 @@ const Profile = () => {
     // formik onSubmit method
     onSubmit: (values) => {
       if (formik.isValid) {
-        console.log("Form submitted with values: ", values);
+        dispatch(saveProfile(values));
         dispatch(nextStep());
       }
     },
