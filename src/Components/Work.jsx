@@ -5,7 +5,7 @@ import { TextField, Grid, Button } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { prevStep } from "../features/stepper/stepperSlice";
+import { prevStep, nextStep } from "../features/stepper/stepperSlice";
 import dayjs from "dayjs";
 import * as Yup from "yup";
 import "../css/style.css";
@@ -54,12 +54,11 @@ const validationSchema = Yup.object().shape({
 const Work = () => {
   const dispatch = useDispatch();
   const work = useSelector((store) => store.work);
-
   const onSubmit = (values, formikHelpers) => {
     // saving experience Array in workSlice
     dispatch(saveWork(values));
-
     formikHelpers.setSubmitting(false);
+    dispatch(nextStep());
   };
 
   const initialValues = { work: work.experience };
