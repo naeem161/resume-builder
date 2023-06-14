@@ -5,6 +5,7 @@ import { TextField, Grid, Button } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { prevStep } from "../features/stepper/stepperSlice";
 import dayjs from "dayjs";
 import * as Yup from "yup";
 import "../css/style.css";
@@ -279,7 +280,9 @@ const Work = () => {
             {/* not functional yet  */}
             <div className="btn-container">
               <div>
-                <Button color="inherit">Back</Button>
+                <Button color="inherit" onClick={() => dispatch(prevStep())}>
+                  Back
+                </Button>
               </div>
               <div>
                 {/* ////////////////Next button/////////////////  */}
