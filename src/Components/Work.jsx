@@ -51,12 +51,12 @@ const validationSchema = Yup.object().shape({
 });
 
 const Work = () => {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const work = useSelector((store) => store.work);
 
   const onSubmit = (values, formikHelpers) => {
     // saving experience Array in workSlice
-    dispath(saveWork(values));
+    dispatch(saveWork(values));
 
     formikHelpers.setSubmitting(false);
   };
