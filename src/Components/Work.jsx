@@ -85,7 +85,7 @@ const Work = () => {
                       <Grid
                         xs={8}
                         style={{ margin: "20px 0 " }}
-                        container
+                        item
                         justifyContent="space-between"
                       >
                         {/* ////////////////Add More button/////////////////  */}
