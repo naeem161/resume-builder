@@ -1,5 +1,5 @@
 import { Formik, Form, ErrorMessage, FieldArray } from "formik";
-import { TextField, Grid } from "@mui/material";
+import { TextField, Grid, Button } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -58,7 +58,7 @@ const onSubmit = (values, formikHelpers) => {
 
 const Work = () => {
   return (
-    <section>
+    <section style={{ margin: "40px 20px 0px 20px" }}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -76,18 +76,39 @@ const Work = () => {
                       justifyContent="center"
                       columnGap={2}
                     >
-                      {/* title fields  */}
-                      <Grid item xs={4} className="item">
+                      <Grid
+                        xs={8}
+                        style={{ margin: "20px 0 " }}
+                        container
+                        justifyContent="space-between"
+                      >
+                        {/* ////////////////Add More button/////////////////  */}
+                        <Button
+                          variant="outlined"
+                          onClick={() => {
+                            arrayHelpers.push(experience);
+                          }}
+                          type="button"
+                        >
+                          Add More
+                        </Button>
+                        {/* ////////////////Remove button/////////////////  */}
                         {formik.values.experienceArray.length > 1 && (
-                          <button
+                          <Button
+                            size="small"
+                            variant="outlined"
+                            color="error"
                             onClick={() => {
                               arrayHelpers.remove(index);
                             }}
                             type="button"
                           >
                             Remove
-                          </button>
+                          </Button>
                         )}
+                      </Grid>
+
+                      <Grid item xs={4} className="item">
                         {/* title field  */}
                         <label className="text-input" htmlFor="title">
                           Title
@@ -266,22 +287,26 @@ const Work = () => {
                       </Grid>
                     </Grid>
                   ))}
-                  <button
-                    className="btn-outline"
-                    onClick={() => {
-                      arrayHelpers.push(experience);
-                    }}
-                    type="button"
-                  >
-                    Add new friend
-                  </button>
                 </>
               )}
             </FieldArray>
-            {/* <button type="submit">Next</button> */}
-            <button type="submit" disabled={formik.isSubmitting}>
-              {formik.isSubmitting ? "Submitting..." : "Submit list"}
-            </button>
+            {/* ////////////////Next button/////////////////  */}
+            {/* not functional yet  */}
+            <div className="btn-container">
+              <div>
+                <Button color="inherit">Back</Button>
+              </div>
+              <div>
+                {/* ////////////////Next button/////////////////  */}
+                <Button
+                  type="submit"
+                  disabled={formik.isSubmitting}
+                  variant="contained"
+                >
+                  {formik.isSubmitting ? "Submitting..." : "Next"}
+                </Button>
+              </div>
+            </div>
           </Form>
         )}
       </Formik>
