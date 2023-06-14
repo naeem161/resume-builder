@@ -9,7 +9,8 @@ const workSlice = createSlice({
   reducers: {
 
     saveWork: (state, { payload }) => {
-      state.experienceArray = payload.work;
+      state.experienceArray = payload;
+
     },
   },
 });

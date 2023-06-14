@@ -1,4 +1,6 @@
 import { Formik, Form, ErrorMessage, FieldArray } from "formik";
+import { useDispatch } from "react-redux";
+import { saveWork } from "../features/work/workSlice";
 import { TextField, Grid, Button } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -51,12 +53,16 @@ const validationSchema = Yup.object().shape({
   ),
 });
 
-const onSubmit = (values, formikHelpers) => {
-  console.log("Form submitted with values: ", values);
-  formikHelpers.setSubmitting(false);
-};
-
 const Work = () => {
+  const dispath = useDispatch();
+
+  const onSubmit = (values, formikHelpers) => {
+    console.log("Form submitted with values: ", values);
+    // saving experience Array in workSlice
+    dispath(saveWork(values));
+    formikHelpers.setSubmitting(false);
+  };
+
   return (
     <section style={{ margin: "40px 20px 0px 20px" }}>
       <Formik
