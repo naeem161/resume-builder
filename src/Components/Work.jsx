@@ -1,5 +1,5 @@
 import { Formik, Form, ErrorMessage, FieldArray } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveWork } from "../features/work/workSlice";
 import { TextField, Grid, Button } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import * as Yup from "yup";
 import "../css/style.css";
 
-const experience = {
+const experienceEmpty = {
   title: "",
   organization: "",
   city: "",
@@ -18,12 +18,9 @@ const experience = {
   endDate: "",
   description: "",
 };
-const initialValues = {
-  experienceArray: [experience],
-};
 
 const validationSchema = Yup.object().shape({
-  experienceArray: Yup.array().of(
+  work: Yup.array().of(
     Yup.object().shape({
       title: Yup.string().required("Required!"),
       organization: Yup.string().required("Required!"),
@@ -55,13 +52,16 @@ const validationSchema = Yup.object().shape({
 
 const Work = () => {
   const dispath = useDispatch();
+  const work = useSelector((store) => store.work);
 
   const onSubmit = (values, formikHelpers) => {
-    console.log("Form submitted with values: ", values);
     // saving experience Array in workSlice
     dispath(saveWork(values));
+
     formikHelpers.setSubmitting(false);
   };
+
+  const initialValues = { work: work.experience };
 
   return (
     <section style={{ margin: "40px 20px 0px 20px" }}>
@@ -72,10 +72,10 @@ const Work = () => {
       >
         {(formik) => (
           <Form>
-            <FieldArray name="experienceArray">
+            <FieldArray name="work">
               {(arrayHelpers) => (
                 <>
-                  {formik.values.experienceArray.map((experience, index) => (
+                  {formik.values.work.map((experience, index) => (
                     <Grid
                       key={index}
                       container
@@ -92,14 +92,14 @@ const Work = () => {
                         <Button
                           variant="outlined"
                           onClick={() => {
-                            arrayHelpers.push(experience);
+                            arrayHelpers.push(experienceEmpty);
                           }}
                           type="button"
                         >
                           Add More
                         </Button>
                         {/* ////////////////Remove button/////////////////  */}
-                        {formik.values.experienceArray.length > 1 && (
+                        {formik.values.work.length > 1 && (
                           <Button
                             size="small"
                             variant="outlined"
@@ -124,16 +124,13 @@ const Work = () => {
                           type="text"
                           fullWidth
                           size="small"
-                          name={`experienceArray[${index}].title`}
+                          name={`work[${index}].title`}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          // value={formik.values.experienceArray[index].title}
                           value={experience.title}
                         />
                         <div className="error-text">
-                          <ErrorMessage
-                            name={`experienceArray[${index}].title`}
-                          />
+                          <ErrorMessage name={`work[${index}].title`} />
                         </div>
                       </Grid>
 
@@ -147,17 +144,13 @@ const Work = () => {
                           type="text"
                           fullWidth
                           size="small"
-                          name={`experienceArray[${index}].organization`}
+                          name={`work[${index}].organization`}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={
-                            formik.values.experienceArray[index].organization
-                          }
+                          value={experience.organization}
                         />
                         <div className="error-text">
-                          <ErrorMessage
-                            name={`experienceArray[${index}].organization`}
-                          />
+                          <ErrorMessage name={`work[${index}].organization`} />
                         </div>
                       </Grid>
                       {/* city field  */}
@@ -170,15 +163,13 @@ const Work = () => {
                           type="text"
                           fullWidth
                           size="small"
-                          name={`experienceArray[${index}].city`}
+                          name={`work[${index}].city`}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.experienceArray[index].city}
+                          value={experience.city}
                         />
                         <div className="error-text">
-                          <ErrorMessage
-                            name={`experienceArray[${index}].city`}
-                          />
+                          <ErrorMessage name={`work[${index}].city`} />
                         </div>
                       </Grid>
                       {/* country field  */}
@@ -191,15 +182,13 @@ const Work = () => {
                           fullWidth
                           size="small"
                           type="text"
-                          name={`experienceArray[${index}].country`}
+                          name={`work[${index}].country`}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.experienceArray[index].country}
+                          value={experience.country}
                         />
                         <div className="error-text">
-                          <ErrorMessage
-                            name={`experienceArray[${index}].country`}
-                          />
+                          <ErrorMessage name={`work[${index}].country`} />
                         </div>
                       </Grid>
                       {/* StartDate field  */}
@@ -214,25 +203,21 @@ const Work = () => {
                             inputFormat="MM/DD/YYYY"
                             fullWidth
                             size="small"
-                            name={`experienceArray[${index}].startDate`}
+                            name={`work[${index}].startDate`}
                             onChange={(value) =>
                               formik.setFieldValue(
-                                `experienceArray[${index}].startDate`,
+                                `work[${index}].startDate`,
                                 dayjs(value).toISOString(),
                                 value,
                                 true
                               )
                             }
                             onBlur={formik.handleBlur}
-                            value={
-                              formik.values.experienceArray[index].startDate
-                            }
+                            value={experience.startDate}
                           />
                         </LocalizationProvider>
                         <div className="error-text">
-                          <ErrorMessage
-                            name={`experienceArray[${index}].startDate`}
-                          />
+                          <ErrorMessage name={`work[${index}].startDate`} />
                         </div>
                       </Grid>
                       {/* EndDate field  */}
@@ -245,25 +230,23 @@ const Work = () => {
                           <DatePicker
                             id="startDate"
                             inputFormat="MM/DD/YYYY"
-                            name={`experienceArray[${index}].endDate`}
+                            name={`work[${index}].endDate`}
                             onChange={(value) =>
                               formik.setFieldValue(
-                                `experienceArray[${index}].endDate`,
+                                `work[${index}].endDate`,
                                 dayjs(value).toISOString(),
                                 value,
                                 true
                               )
                             }
                             onBlur={formik.handleBlur}
-                            value={formik.values.experienceArray[index].endDate}
+                            value={experience.endDate}
                             fullWidth
                             size="small"
                           />
                         </LocalizationProvider>
                         <div className="error-text">
-                          <ErrorMessage
-                            name={`experienceArray[${index}].endDate`}
-                          />
+                          <ErrorMessage name={`work[${index}].endDate`} />
                         </div>
                       </Grid>
                       {/* Description field  */}
@@ -274,21 +257,17 @@ const Work = () => {
                         <TextField
                           id="description"
                           type="text"
-                          name={`experienceArray[${index}].description`}
+                          name={`work[${index}].description`}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
                           multiline
                           rows={3}
                           fullWidth
                           size="small"
-                          value={
-                            formik.values.experienceArray[index].description
-                          }
+                          value={experience.description}
                         />
                         <div className="error-text">
-                          <ErrorMessage
-                            name={`experienceArray[${index}].description`}
-                          />
+                          <ErrorMessage name={`work[${index}].description`} />
                         </div>
                       </Grid>
                     </Grid>

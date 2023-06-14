@@ -1,16 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const experience = {
+  title: "",
+  organization: "",
+  city: "",
+  country: "",
+  startDate: "",
+  endDate: "",
+  description: "",
+};
 
-
+const initialState = {
+  experience: [experience],
+};
 
 const workSlice = createSlice({
   name: "work",
-  initialState: { experienceArray: [] },
+  initialState,
   reducers: {
 
     saveWork: (state, { payload }) => {
-      state.experienceArray = payload;
 
+      state.experience = payload.work;
     },
   },
 });
