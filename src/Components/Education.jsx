@@ -46,7 +46,6 @@ const Education = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={(values, formikHelpers) => {
-          console.log("form values ", values);
           formikHelpers.setSubmitting(false);
           dispatch(nextStep());
           dispatch(saveEducation(values));
