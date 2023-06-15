@@ -4,6 +4,9 @@ import stepperSlice from './features/stepper/stepperSlice'
 import profileSlice from './features/profile/profileSlice'
 import workSlice from './features/work/workSlice'
 import educationSlice from './features/education/educationSlice'
+import skillsSlice from './features/skills/skillsSlice'
+
+
 
 
 export const store = configureStore({
@@ -11,7 +14,8 @@ export const store = configureStore({
     stepper: stepperSlice,
     profile: profileSlice,
     work: workSlice,
-    education: educationSlice
+    education: educationSlice,
+    skills: skillsSlice,
   },
 
 });
