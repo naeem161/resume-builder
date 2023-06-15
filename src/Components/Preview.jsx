@@ -44,6 +44,7 @@ const Preview = () => {
           style={{
             display: "flex",
             justifyContent: "space-between",
+            fontWeight: "600",
           }}
         >
           <p>{education.institute}</p>
@@ -101,17 +102,17 @@ const Preview = () => {
         </div>
         {/* ---------------------------main area------------------------------- */}
         <div className={styles.main}>
-          <h1> Summary </h1>
+          <h1 className={styles.catagory}> Summary </h1>
           <p>{profile.summary}</p>
           {/* experiences section */}
           <div>
-            <h1>Experience</h1>
+            <h1 className={styles.catagory}>Experience</h1>
             {work.experience &&
               work.experience.map((exp) => populateExperience(exp))}
           </div>
           {/* education section */}
           <div>
-            <h1>Education</h1>
+            <h1 className={styles.catagory}>Education</h1>
             <ul>{education.education.map((edu) => populateEducation(edu))}</ul>
           </div>
         </div>
