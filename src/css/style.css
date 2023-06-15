@@ -18,6 +18,13 @@
   border: 0.5px solid #000000 !important;
 }
 
+/* skills tag input boder */
+.rti--container {
+  border: 0.01px solid #000000 !important;
+  border-radius: 30px !important;
+  height: 100px;
+}
+
 .item {
   margin-bottom: 0.15rem !important;
   min-height: 100px !important;
