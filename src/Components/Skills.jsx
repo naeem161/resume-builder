@@ -3,15 +3,19 @@ import { InputLabel, Button, Grid } from "@mui/material";
 import { useFormik } from "formik";
 import "../css/style.css";
 import * as Yup from "yup";
+import { useSelector } from "react-redux";
 
 const validationSchema = Yup.object({
   skills: Yup.array().of(Yup.string()).min(3).required("Required!"),
 });
 
 const Skills = () => {
+  const { skills } = useSelector((store) => store.skills);
+  console.log(skills);
+
   const formik = useFormik({
     initialValues: {
-      skills: [],
+      skills: skills,
     },
 
     validationSchema: validationSchema,
