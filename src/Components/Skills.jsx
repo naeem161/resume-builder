@@ -2,6 +2,11 @@ import { TagsInput } from "react-tag-input-component";
 import { InputLabel, Button, Grid } from "@mui/material";
 import { useFormik } from "formik";
 import "../css/style.css";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  skills: Yup.array().of(Yup.string()).min(3).required("Required!"),
+});
 
 const Skills = () => {
   const formik = useFormik({
@@ -9,6 +14,7 @@ const Skills = () => {
       skills: [],
     },
 
+    validationSchema: validationSchema,
     onSubmit: (values) => {
       // saving skills in slice
       if (formik.isValid) {
@@ -27,7 +33,7 @@ const Skills = () => {
           <TagsInput
             name="skills"
             id="skills"
-            placeHolder="enter skills"
+            placeHolder="enter skills and press Enter"
             onChange={(value) => {
               formik.setFieldValue("skills", value);
             }}
@@ -35,6 +41,11 @@ const Skills = () => {
             onBlur={formik.handleBlur}
             value={formik.values.skills}
           />
+          <div>
+            {formik.errors.skills && formik.touched.skills && (
+              <small className="error-text">{formik.errors.skills}</small>
+            )}
+          </div>
         </Grid>
       </Grid>
 
