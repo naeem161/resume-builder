@@ -5,7 +5,9 @@ import EmailIcon from "../icons/sign.svg";
 import LocationIcon from "../icons/location.svg";
 
 const Preview = () => {
-  const { profile, skills, interests, work } = useSelector((store) => store);
+  const { profile, skills, interests, work, education } = useSelector(
+    (store) => store
+  );
 
   // format date function
   function formatDate(utcDate) {
@@ -21,16 +23,37 @@ const Preview = () => {
       <>
         <h3 style={{ color: "#204d8b" }}>{experience.title}</h3>
         <div>
-          <p style={{ color: "#808080" }}>
+          <p style={{ color: "#808080", margin: "0px" }}>
             {experience.organization}, {experience.country}
           </p>
-          <p>
+          <p style={{ margin: "0px" }}>
             {formatDate(experience.startDate)} –{" "}
             {formatDate(experience.endDate)}
           </p>
         </div>
         <p>{experience.description}</p>
       </>
+    );
+  };
+
+  // Education Function
+  const populateEducation = (education) => {
+    return (
+      <li>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <p>{education.institute}</p>
+
+          <p>{formatDate(education.date)}</p>
+        </div>
+        <p style={{ margin: "0" }}>
+          <em>{education.degree} </em> in {education.study}
+        </p>
+      </li>
     );
   };
 
@@ -82,9 +105,14 @@ const Preview = () => {
           <p>{profile.summary}</p>
           {/* experiences section */}
           <div>
-            <h1 className="heading-decorator">Experience</h1>
+            <h1>Experience</h1>
             {work.experience &&
               work.experience.map((exp) => populateExperience(exp))}
+          </div>
+          {/* education section */}
+          <div>
+            <h1>Education</h1>
+            <ul>{education.education.map((edu) => populateEducation(edu))}</ul>
           </div>
         </div>
       </div>
