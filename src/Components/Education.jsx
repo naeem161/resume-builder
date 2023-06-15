@@ -4,7 +4,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { Formik, Form, ErrorMessage, FieldArray } from "formik";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { prevStep, nextStep } from "../features/stepper/stepperSlice";
+import { saveEducation } from "../features/education/educationSlice";
 import * as Yup from "yup";
 import "../css/style.css";
 
@@ -35,6 +37,7 @@ const EducationEmptyObj = {
 };
 
 const Education = () => {
+  const dispatch = useDispatch();
   const education = useSelector((store) => store.education);
   const initialValues = { education: education.education };
 
@@ -45,6 +48,8 @@ const Education = () => {
         onSubmit={(values, formikHelpers) => {
           console.log("form values ", values);
           formikHelpers.setSubmitting(false);
+          dispatch(nextStep());
+          dispatch(saveEducation(values));
         }}
         validationSchema={validationSchema}
       >
@@ -192,7 +197,9 @@ const Education = () => {
             {/* not functional yet  */}
             <div className="btn-container">
               <div>
-                <Button color="inherit">Back</Button>
+                <Button color="inherit" onClick={() => dispatch(prevStep())}>
+                  Back
+                </Button>
               </div>
               <div>
                 {/* ////////////////Next button/////////////////  */}
