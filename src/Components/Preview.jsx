@@ -5,8 +5,8 @@ import EmailIcon from "../icons/sign.svg";
 import LocationIcon from "../icons/location.svg";
 
 const Preview = () => {
-  const { profile, skills } = useSelector((store) => store);
-  console.log(skills);
+  const { profile, skills, interests } = useSelector((store) => store);
+
   return (
     <div
       className={styles.container}
@@ -37,6 +37,15 @@ const Preview = () => {
           <ul>
             {skills.skills.map((skill, index) => (
               <li key={index}> {skill} </li>
+            ))}
+          </ul>
+
+          {/* showing Interests */}
+
+          <h2>Interest</h2>
+          <ul>
+            {interests.interests.map((interest, index) => (
+              <li key={index}> {interest} </li>
             ))}
           </ul>
         </div>
