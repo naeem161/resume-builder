@@ -1,0 +1,28 @@
+.container {
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  width: 796.8px;
+  height: 1124px;
+  margin: auto;
+}
+
+.resumeRow {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  background-color: orange;
+  width: 34%;
+  min-height: 1124px;
+  border: 2px solid black;
+}
+
+.main {
+  width: 66%;
+  border: 2px solid red;
+  /* padding: 20px 10px; */
+}
