@@ -5,7 +5,8 @@ import EmailIcon from "../icons/sign.svg";
 import LocationIcon from "../icons/location.svg";
 
 const Preview = () => {
-  const { profile } = useSelector((store) => store);
+  const { profile, skills } = useSelector((store) => store);
+  console.log(skills);
   return (
     <div
       className={styles.container}
@@ -29,6 +30,15 @@ const Preview = () => {
             <img src={LocationIcon} className={styles.icon} />
             {`${profile.city}, ${profile.country}`}
           </div>
+
+          {/* showing skill */}
+
+          <h2>Skills</h2>
+          <ul>
+            {skills.skills.map((skill, index) => (
+              <li key={index}> {skill} </li>
+            ))}
+          </ul>
         </div>
         {/* ---------------------------main area------------------------------- */}
         <div className={styles.main}>
