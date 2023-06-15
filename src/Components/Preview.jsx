@@ -5,7 +5,34 @@ import EmailIcon from "../icons/sign.svg";
 import LocationIcon from "../icons/location.svg";
 
 const Preview = () => {
-  const { profile, skills, interests } = useSelector((store) => store);
+  const { profile, skills, interests, work } = useSelector((store) => store);
+
+  // format date function
+  function formatDate(utcDate) {
+    const date = new Date(utcDate);
+    const month = date.getMonth() + 1;
+
+    return `${month}/${date.getDate()}/${date.getFullYear()}`;
+  }
+
+  // Experience Function
+  const populateExperience = (experience) => {
+    return (
+      <>
+        <h3 style={{ color: "#204d8b" }}>{experience.title}</h3>
+        <div>
+          <p style={{ color: "#808080" }}>
+            {experience.organization}, {experience.country}
+          </p>
+          <p>
+            {formatDate(experience.startDate)} –{" "}
+            {formatDate(experience.endDate)}
+          </p>
+        </div>
+        <p>{experience.description}</p>
+      </>
+    );
+  };
 
   return (
     <div
@@ -53,6 +80,12 @@ const Preview = () => {
         <div className={styles.main}>
           <h1> Summary </h1>
           <p>{profile.summary}</p>
+          {/* experiences section */}
+          <div>
+            <h1 className="heading-decorator">Experience</h1>
+            {work.experience &&
+              work.experience.map((exp) => populateExperience(exp))}
+          </div>
         </div>
       </div>
     </div>
