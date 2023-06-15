@@ -1,7 +1,11 @@
-// import { Container, Box } from "@mui/material";
 import styles from "./Preview.module.css";
+import { useSelector } from "react-redux";
+import PhoneIcon from "../icons/phone.svg";
+import EmailIcon from "../icons/sign.svg";
+import LocationIcon from "../icons/location.svg";
 
 const Preview = () => {
+  const { profile } = useSelector((store) => store);
   return (
     <div
       className={styles.container}
@@ -10,17 +14,26 @@ const Preview = () => {
       <div className={styles.resumeRow}>
         {/* ---------------------------sidebar area------------------------------- */}
         <div className={styles.sidebar}>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure,
-          laborum?
+          <h1
+            style={{ textAlign: "center" }}
+          >{`${profile.firstName} ${profile.lastName}`}</h1>
+          <div className={styles.contactSection}>
+            <img src={EmailIcon} className={styles.icon} />
+            {profile.phone}
+          </div>
+          <div className={styles.contactSection}>
+            <img src={PhoneIcon} className={styles.icon} />
+            {profile.email}
+          </div>
+          <div className={styles.contactSection}>
+            <img src={LocationIcon} className={styles.icon} />
+            {`${profile.city}, ${profile.country}`}
+          </div>
         </div>
         {/* ---------------------------main area------------------------------- */}
         <div className={styles.main}>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam velit
-            porro pariatur harum quaerat qui in reprehenderit error minus amet
-            voluptatem enim aliquam numquam architecto, delectus eaque,
-            perferendis odio sint?
-          </p>
+          <h1> Summary </h1>
+          <p>{profile.summary}</p>
         </div>
       </div>
     </div>
