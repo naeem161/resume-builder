@@ -3,15 +3,17 @@ import { InputLabel, Button, Grid } from "@mui/material";
 import { useFormik } from "formik";
 import "../css/style.css";
 import * as Yup from "yup";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { nextStep, prevStep } from "../features/stepper/stepperSlice";
+import { saveSkills } from "../features/skills/skillsSlice";
 
 const validationSchema = Yup.object({
   skills: Yup.array().of(Yup.string()).min(3).required("Required!"),
 });
 
 const Skills = () => {
+  const dispatch = useDispatch();
   const { skills } = useSelector((store) => store.skills);
-  console.log(skills);
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +24,8 @@ const Skills = () => {
     onSubmit: (values) => {
       // saving skills in slice
       if (formik.isValid) {
-        console.log(values);
+        dispatch(saveSkills(values));
+        dispatch(nextStep());
       }
     },
   });
@@ -56,7 +59,9 @@ const Skills = () => {
       {/* Next & previous button  */}
       <div className="btn-container">
         <div>
-          <Button color="inherit">Back</Button>
+          <Button color="inherit" onClick={() => dispatch(prevStep())}>
+            Back
+          </Button>
         </div>
         <div>
           <Button
