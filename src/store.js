@@ -5,6 +5,8 @@ import profileSlice from './features/profile/profileSlice'
 import workSlice from './features/work/workSlice'
 import educationSlice from './features/education/educationSlice'
 import skillsSlice from './features/skills/skillsSlice'
+import interestsSlice from './features/interests/interestsSlice'
+
 
 
 
@@ -16,6 +18,7 @@ export const store = configureStore({
     work: workSlice,
     education: educationSlice,
     skills: skillsSlice,
+    interests: interestsSlice
   },
 
 });
