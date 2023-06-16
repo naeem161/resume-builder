@@ -146,21 +146,17 @@ const Preview = () => {
           </div>
         </div>
       </div>
-      {/* back btn to go to previous step  */}
-      <div>
-        <Button color="inherit" onClick={() => dispatch(prevStep())}>
-          Back
-        </Button>
-      </div>
-      {/* download btn for downloading resume  */}
-      <Button variant="contained" color="error" onClick={handleGeneratePdf}>
-        Download
-      </Button>
-      {/* buttons for changing sidebar Backgroung & Text color */}
-      <div style={{ display: "flex", gap: 10 }}>
+
+      <div style={{ display: "flex", gap: 10 }} className="btn-container">
+        {/* back btn to go to previous step  */}
+        <div>
+          <Button color="inherit" onClick={() => dispatch(prevStep())}>
+            Back
+          </Button>
+        </div>
         {/* change sidebar background btn  */}
         <div>
-          <Button variant="contained">
+          <Button variant="contained" size="small">
             <InputLabel
               htmlFor="bg-color"
               sx={{
@@ -179,7 +175,7 @@ const Preview = () => {
         </div>
         {/* change sidebar text color  */}
         <div>
-          <Button variant="contained">
+          <Button variant="contained" size="small">
             <InputLabel
               htmlFor="text-color"
               sx={{
@@ -194,6 +190,12 @@ const Preview = () => {
               value={sidebarColor}
               onChange={(e) => setSidebarColor(e.target.value)}
             />
+          </Button>
+        </div>
+        <div>
+          {/* download btn for downloading resume  */}
+          <Button variant="contained" color="error" onClick={handleGeneratePdf}>
+            Download
           </Button>
         </div>
       </div>
