@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./Preview.module.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import PhoneIcon from "../icons/phone.svg";
 import EmailIcon from "../icons/sign.svg";
 import LocationIcon from "../icons/location.svg";
 import { Input, Button, InputLabel } from "@mui/material";
+import { prevStep } from "../features/stepper/stepperSlice";
 
 const Preview = () => {
   const [sidebarBGColor, setSidebarBGColor] = React.useState("#959595");
@@ -12,8 +13,7 @@ const Preview = () => {
   const { profile, skills, interests, work, education } = useSelector(
     (store) => store
   );
-
-  console.log(sidebarColor);
+  const dispatch = useDispatch();
 
   // format date function
   function formatDate(utcDate) {
@@ -133,7 +133,12 @@ const Preview = () => {
           </div>
         </div>
       </div>
-
+      {/* back btn to go to previous step  */}
+      <div>
+        <Button color="inherit" onClick={() => dispatch(prevStep())}>
+          Back
+        </Button>
+      </div>
       {/* buttons for changing sidebar Backgroung & Text color */}
       <div style={{ display: "flex", gap: 10 }}>
         <div>
