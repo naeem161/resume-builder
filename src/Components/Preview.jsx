@@ -6,8 +6,10 @@ import EmailIcon from "../icons/sign.svg";
 import LocationIcon from "../icons/location.svg";
 import { Input, Button, InputLabel } from "@mui/material";
 import { prevStep } from "../features/stepper/stepperSlice";
+import jsPDF from "jspdf";
 
 const Preview = () => {
+  const resumeRef = React.useRef(null);
   const [sidebarBGColor, setSidebarBGColor] = React.useState("#959595");
   const [sidebarColor, setSidebarColor] = React.useState("#FFFFFF");
   const { profile, skills, interests, work, education } = useSelector(
@@ -64,11 +66,22 @@ const Preview = () => {
     );
   };
 
+  const handleGeneratePdf = () => {
+    const doc = new jsPDF("p", "px", [796.8, 1123.2]);
+
+    doc.html(resumeRef.current, {
+      async callback(doc) {
+        doc.save(`${profile.firstName} Resume`);
+      },
+    });
+  };
+
   return (
     <>
       <div
         className={styles.container}
         style={{ margin: "40px auto", border: "2px solid red" }}
+        ref={resumeRef}
       >
         <div className={styles.resumeRow}>
           {/* ---------------------------sidebar area------------------------------- */}
@@ -139,8 +152,13 @@ const Preview = () => {
           Back
         </Button>
       </div>
+      {/* download btn for downloading resume  */}
+      <Button variant="contained" color="error" onClick={handleGeneratePdf}>
+        Download
+      </Button>
       {/* buttons for changing sidebar Backgroung & Text color */}
       <div style={{ display: "flex", gap: 10 }}>
+        {/* change sidebar background btn  */}
         <div>
           <Button variant="contained">
             <InputLabel
@@ -159,6 +177,7 @@ const Preview = () => {
             />
           </Button>
         </div>
+        {/* change sidebar text color  */}
         <div>
           <Button variant="contained">
             <InputLabel
