@@ -2,7 +2,7 @@ import { TextField, Grid, Button } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from "dayjs";
+
 import { Formik, Form, ErrorMessage, FieldArray } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { prevStep, nextStep } from "../features/stepper/stepperSlice";
@@ -174,7 +174,7 @@ const Education = () => {
                             onChange={(value) =>
                               formik.setFieldValue(
                                 `education[${index}].date`,
-                                dayjs(value).toISOString(),
+
                                 value,
                                 true
                               )

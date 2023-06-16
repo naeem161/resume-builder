@@ -6,7 +6,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { prevStep, nextStep } from "../features/stepper/stepperSlice";
-import dayjs from "dayjs";
 import * as Yup from "yup";
 import "../css/style.css";
 
@@ -207,7 +206,6 @@ const Work = () => {
                             onChange={(value) =>
                               formik.setFieldValue(
                                 `work[${index}].startDate`,
-                                dayjs(value).toISOString(),
                                 value,
                                 true
                               )
@@ -234,7 +232,6 @@ const Work = () => {
                             onChange={(value) =>
                               formik.setFieldValue(
                                 `work[${index}].endDate`,
-                                dayjs(value).toISOString(),
                                 value,
                                 true
                               )
