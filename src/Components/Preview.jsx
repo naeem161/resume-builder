@@ -80,7 +80,7 @@ const Preview = () => {
     <>
       <div
         className={styles.container}
-        style={{ margin: "40px auto", border: "2px solid red" }}
+        style={{ margin: "40px auto" }}
         ref={resumeRef}
       >
         <div className={styles.resumeRow}>
